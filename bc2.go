@@ -21,7 +21,7 @@ func main() {
 
         for {
                 // Generate a random sleep duration between 1 and 5 minutes
-                sleepDuration := time.Duration(rand.Intn(1)+1) * time.Minute
+                sleepDuration := time.Duration(rand.Intn(10)+1) * time.Minute
 
                 time.Sleep(sleepDuration)
 
